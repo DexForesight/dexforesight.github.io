@@ -1,0 +1,26 @@
+{
+  "sjtu": {
+    "file": "sjtu-logo.png",
+    "source_page": "https://vi.sjtu.edu.cn/index.php/articles/base/1",
+    "asset_url": "https://vi.sjtu.edu.cn/img/base/Logo.png",
+    "width": 240,
+    "height": 240,
+    "description": "Official red seal on transparent background"
+  },
+  "fudan": {
+    "file": "fudan-emblem.gif",
+    "source_page": "https://fao.fudan.edu.cn/33/a2/c1609a13218/page.htm",
+    "asset_url": "https://fao.fudan.edu.cn/_upload/article/01/3d/5997190148e4a7dceb1727a28280/892386a8-70cc-48d0-a997-075c692bd420.gif",
+    "width": 557,
+    "height": 572,
+    "description": "Official black emblem on white; recommended over small homepage wordmark"
+  },
+  "cuhk": {
+    "file": "cuhk-logo.png",
+    "source_page": "https://www.cuhk.edu.hk/english/index.html",
+    "asset_url": "https://www.cuhk.edu.hk/english/images/cuhk_logo_2x.png?20221027",
+    "width": 556,
+    "height": 100,
+    "description": "Hong Kong main campus official color emblem and bilingual black wordmark on white"
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DexForesight: Grounding Dexterous Policies with Implicit Spatial Foresight</title>
+  <meta name="description" content="DexForesight transfers predictive hand–scene dynamics into dexterous policies. Spatial foresight learned during training, retained in the policy at deployment.">
+  <link rel="canonical" href="https://dexforesight.github.io/">
+  <meta property="og:url" content="https://dexforesight.github.io/">
+  <meta name="theme-color" content="#11191c">
+  <meta property="og:title" content="DexForesight: Grounding Dexterous Policies with Implicit Spatial Foresight">
+  <meta property="og:description" content="Spatial foresight, grounded in action. A research project from Sharpa Robotics, SJTU, CUHK, and Fudan University.">
+  <meta property="og:image" content="https://dexforesight.github.io/media/poster.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/nunito-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="app.js?v=2" defer></script>
+</head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-replay" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+</defs></svg>
+<a href="#paper" class="skip-link">Skip to the paper</a>
+<header class="topbar" id="topbar">
+  <a href="#top" class="wordmark" aria-label="DexForesight home"><span class="brand-dex">Dex</span><span class="brand-foresight">Foresight</span></a>
+  <nav aria-label="Main navigation"><a class="top-link" href="#method">Method</a><a class="top-link" href="#results">Results</a><a href="dexforesight.pdf" class="button button-small top-paper" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg>Paper<svg class="icon arrow"><use href="#i-arrow"/></svg></a></nav>
+</header>
+<main>
+<section class="hero" id="top" aria-label="DexForesight overview" data-phase="intro">
+  <div class="hero-media">
+    <video id="background-video" class="hero-video background-video" src="media/background.mp4" poster="media/poster.jpg" muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <video id="intro-video" class="hero-video intro-video" src="media/overview.mp4" poster="media/poster.jpg" autoplay muted playsinline preload="auto" aria-label="DexForesight overview demonstration" tabindex="-1"></video>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-frost" aria-hidden="true"></div>
+  <div class="hero-title" id="hero-title" aria-hidden="true">
+    <div class="title-float">
+      <h1><span class="brand-dex">Dex</span><span class="brand-foresight">Foresight</span></h1>
+      <p class="hero-subtitle">Grounding Dexterous Policies with<br class="desktop-break"> <strong>Implicit Spatial Foresight</strong></p>
+      <div class="hero-actions"><a class="button button-light" href="dexforesight.pdf" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg>Read the paper<svg class="icon"><use href="#i-arrow"/></svg></a><a class="hero-explore" href="#abstract">Explore the research <span>↓</span></a></div>
+    </div>
+  </div>
+  <button id="start-video" class="start-video" hidden><svg class="icon"><use href="#i-play"/></svg>Play overview</button>
+  <div class="hero-bottom">
+    <a class="scroll-cue" href="#paper">SCROLL TO EXPLORE<svg class="icon"><use href="#i-down"/></svg></a>
+    <div class="hero-controls"><button id="skip-intro" class="text-control">Skip intro <span>↗</span></button><button id="replay-intro" class="text-control" hidden><svg class="icon"><use href="#i-replay"/></svg>Replay intro</button><button id="toggle-video" class="icon-button" aria-label="Pause video"><svg class="icon"><use id="play-icon" href="#i-pause"/></svg></button></div>
+  </div>
+  <div class="intro-track" aria-hidden="true"><span id="intro-progress"></span></div>
+</section>
+<div class="paper-layout" id="paper">
+  <aside class="contents" aria-label="Article contents"><div class="contents-label">ON THIS PAGE</div><nav>
+    <a href="#abstract" aria-current="location">Abstract</a><a href="#demonstrations">Real-robot experiments</a><a href="#method">The DexForesight model</a><a href="#training">Data &amp; training</a><a href="#results">Evaluation results</a><a href="#foresight">Retaining spatial foresight</a><a href="#conclusion">Conclusion</a><a href="#bibtex">BibTeX</a>
+  </nav><a class="contents-pdf" href="dexforesight.pdf" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg>Full paper<svg class="icon"><use href="#i-arrow"/></svg></a></aside>
+  <details class="mobile-contents"><summary>Contents <span>+</span></summary><nav><a href="#abstract">Abstract</a><a href="#demonstrations">Real-robot experiments</a><a href="#method">The DexForesight model</a><a href="#training">Data &amp; training</a><a href="#results">Evaluation results</a><a href="#foresight">Retaining spatial foresight</a><a href="#bibtex">BibTeX</a></nav></details>
+  <article class="paper-content">
+    <header class="paper-header">
+      <h2><span class="paper-brand"><span class="brand-dex">Dex</span><span class="brand-foresight">Foresight</span></span><br>Grounding Dexterous Policies with<br class="wide-break"> Implicit Spatial Foresight</h2>
+      <div class="authors"><div class="author-row"><span>Zhongxi Chen<sup>1,2</sup></span><span>Yi Yang<sup>1,2</sup></span><span>Xinyi Chen<sup>4</sup></span><span>Mingzhe Ye<sup>1,2</sup></span></div><div class="author-row"><span>Yaping Li<sup>1,3</sup></span><span>Zhihong Liu<sup>1,2</sup></span><span>Congsheng Xu<sup>1,2</sup></span><span>Haonan Wang<sup>1</sup></span><span>Zhijie Deng<sup>2,*</sup></span></div></div>
+      <div class="affiliations"><span><sup>1</sup>Sharpa Robotics</span><span><sup>2</sup>SJTU–Sharpa Joint Lab for Embodied AI, SJTU</span><span><sup>3</sup>The Chinese University of Hong Kong</span><span><sup>4</sup>Fudan University</span></div>
+      <p class="correspondence">* Corresponding author</p>
+      <div class="paper-links"><a class="button button-dark" href="dexforesight.pdf" target="_blank" rel="noopener"><svg class="icon"><use href="#i-paper"/></svg>Paper<svg class="icon"><use href="#i-arrow"/></svg></a><span class="button button-outline arxiv-pending" role="link" aria-disabled="true" title="The arXiv link will be added when the preprint is available."><span class="arxiv-word">arXiv</span><span class="coming-soon">Coming soon</span></span><a class="button button-outline" href="#bibtex">Cite this work <span>↗</span></a></div>
+      <div class="institutions" aria-label="Participating institutions">
+        <a href="https://www.sharpa.com/" target="_blank" rel="noopener" aria-label="Sharpa Robotics" title="Sharpa Robotics"><img class="logo-sharpa" src="logos/sharpa.svg" alt="Sharpa Robotics"></a>
+        <a href="https://www.sjtu.edu.cn/" target="_blank" rel="noopener" aria-label="Shanghai Jiao Tong University" title="Shanghai Jiao Tong University"><img class="institution-emblem" src="logos/sjtu.png" alt="Shanghai Jiao Tong University emblem"></a>
+        <a href="https://www.fudan.edu.cn/" target="_blank" rel="noopener" aria-label="Fudan University" title="Fudan University"><img class="institution-emblem" src="logos/fudan.gif" alt="Fudan University emblem"></a>
+        <a href="https://www.cuhk.edu.hk/" target="_blank" rel="noopener" aria-label="The Chinese University of Hong Kong" title="The Chinese University of Hong Kong"><span class="cuhk-emblem-window"><img src="logos/cuhk.png" alt="The Chinese University of Hong Kong emblem"></span></a>
+      </div>
+    </header>
+    <section id="abstract" class="article-section">
+      <div class="section-heading"><span class="section-number">01</span><h2>Abstract</h2></div>
+      <p class="lead">Dexterous manipulation requires rich spatial foresight over both the surrounding scene and the robot hand.</p>
+      <p>Existing world-action models often acquire such predictive knowledge through explicit future prediction. We introduce <strong>DexForesight</strong>, a framework that learns spatial foresight implicitly by injecting dynamics-aware world representations into the latent space of a dexterous policy.</p>
+      <p>During training, DexForesight learns an action-conditioned spatial world model from offline scene depth, kinematic hand geometry, and demonstration trajectories. The world model predicts 3D hand-point motion and visual feature changes, capturing both articulated hand dynamics and scene changes under demonstrated actions, including the motion of fingers occluded from the cameras. We then freeze the world model and align policy queries with its predictive world queries, transferring the learned spatial dynamics into policy latents and using them to condition action generation.</p>
+      <p>At deployment, <strong>only the policy is retained</strong>, operating on RGB observations, language, and robot state without depth input or explicit future prediction. On 11 DexJoCo simulation tasks, DexForesight improves the overall success rate of the base policy from 49.4% to <strong>60.5%</strong>. On three real-robot dexterous manipulation tasks, DexForesight achieves <strong>58.3%</strong> success, compared with 50.0% for the strongest baseline.</p>
+    </section>
+    <section id="demonstrations" class="article-section real-robot-section">
+      <div class="section-heading"><span class="section-number">02</span><h2>Real-robot experiments</h2></div>
+      <p>Three dexterous manipulation tasks on the Sharpa platform, requiring precise finger coordination, object alignment, and controlled contact.</p>
+      <div class="real-robot-tasks">
+        <article class="real-task">
+          <div class="task-video-wrap"><video class="task-video" id="task-close-box" controls muted playsinline preload="none" poster="media/tasks/close-box.jpg" src="media/tasks/close-box.mp4" aria-label="Close Box real-robot experiment"></video></div>
+          <div class="task-description"><h3>Close Box</h3><p>Coordinate both hands to align the lid with the box and press it closed.</p><div class="task-speed" role="group" aria-label="Close Box playback speed"><span>Playback</span><button data-task="task-close-box" data-speed="1" aria-pressed="true">1×</button><button data-task="task-close-box" data-speed="3" aria-pressed="false">3×</button></div></div>
+        </article>
+        <article class="real-task">
+          <div class="task-video-wrap"><video class="task-video" id="task-insert-battery" controls muted playsinline preload="none" poster="media/tasks/insert-battery.jpg" src="media/tasks/insert-battery-trimmed.mp4" aria-label="Insert Battery real-robot experiment"></video></div>
+          <div class="task-description"><h3>Insert Battery</h3><p>Align a battery with its holder and guide it into place through precise finger positioning.</p><div class="task-speed" role="group" aria-label="Insert Battery playback speed"><span>Playback</span><button data-task="task-insert-battery" data-speed="1" aria-pressed="true">1×</button><button data-task="task-insert-battery" data-speed="3" aria-pressed="false">3×</button></div></div>
+        </article>
+        <article class="real-task">
+          <div class="task-video-wrap"><video class="task-video" id="task-screw-on-lid" controls muted playsinline preload="none" poster="media/tasks/screw-on-lid.jpg" src="media/tasks/screw-on-lid.mp4" aria-label="Screw On Lid real-robot experiment"></video></div>
+          <div class="task-description"><h3>Screw On Lid</h3><p>Stabilize the cup with one hand while the other aligns and rotates the lid to tighten it.</p><div class="task-speed" role="group" aria-label="Screw On Lid playback speed"><span>Playback</span><button data-task="task-screw-on-lid" data-speed="1" aria-pressed="true">1×</button><button data-task="task-screw-on-lid" data-speed="3" aria-pressed="false">3×</button></div></div>
+        </article>
+      </div>
+    </section>
+    <section id="method" class="article-section">
+      <div class="section-heading"><span class="section-number">03</span><h2>The <span class="accent">DexForesight</span> model</h2></div>
+      <p class="lead">Learn how the world changes.<br>Transfer that knowledge into action.</p>
+      <p>DexForesight separates learning predictive spatial representations from generating actions. A spatial world model learns hand and scene dynamics; a policy absorbs those representations through query alignment.</p>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="figures/teaser.webp" aria-label="Enlarge DexForesight overview"><img src="figures/teaser.webp" alt="DexForesight overview: privileged spatial supervision during training is transferred into a dexterous policy for deployment." loading="lazy"><span class="expand-badge"><svg class="icon"><use href="#i-expand"/></svg></span></button><figcaption><strong>Spatial foresight, grounded in action.</strong> Predictive hand–scene representations are learned during training and transferred into policy latents.</figcaption></figure>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="figures/new_pipeline.webp" aria-label="Enlarge DexForesight architecture"><img src="figures/new_pipeline.webp" loading="lazy" alt="Architecture showing the spatial world model, hand flow and visual dynamics experts, and query alignment with the dexterous policy."><span class="expand-badge"><svg class="icon"><use href="#i-expand"/></svg></span></button><figcaption><strong>Architecture and query alignment.</strong> Queries from the frozen world model supervise policy queries, which then condition the action expert.</figcaption></figure>
+      <div class="method-step"><span class="step-index">A</span><div><h3>Learn action-conditioned spatial dynamics</h3><p>The world model combines RGB, offline depth, language, robot state, and kinematic hand geometry. Its Hand Flow Expert predicts 3D hand-point motion, while its Visual Dynamics Expert predicts changes in image features. Hand geometry provides supervision even for fingers hidden from the cameras.</p></div></div>
+      <div class="method-step"><span class="step-index">B</span><div><h3>Align queries. Retain the policy.</h3><p>After world-model training, its parameters are frozen. Policy queries are aligned with the predictive world queries through token and relational objectives, then supplied to the action expert. At inference, the world model and future decoders are removed.</p></div></div>
+    </section>
+    <section id="training" class="article-section">
+      <div class="section-heading"><span class="section-number">04</span><h2>Data &amp; training</h2></div>
+      <p>Approximately <strong>370 hours of demonstrations across 60 tasks</strong> cover spatial arrangement, assembly and contact, rotation and articulation, deformable objects, and tool use. A 100-hour subset adds scene depth estimated offline from stereo RGB sequences.</p>
+      <div class="training-stages"><div><span>STAGE 01</span><h3>Warmup</h3><p>Adapt the backbone and prediction modules to hand-motion and visual objectives.</p></div><div><span>STAGE 02</span><h3>Dynamics pretraining</h3><p>Learn action-conditioned hand–scene dynamics from demonstration trajectories.</p></div><div><span>STAGE 03</span><h3>Depth injection</h3><p>Refine spatial representations with offline depth and trainable fusion modules.</p></div></div>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="figures/data_recipe.webp" aria-label="Enlarge training data figure"><img src="figures/data_recipe.webp" alt="Data and training recipe showing recording hours and examples for five task categories." loading="lazy"><span class="expand-badge"><svg class="icon"><use href="#i-expand"/></svg></span></button><figcaption><strong>Real-robot data and training.</strong> Depth is used for training only; deployed policy inputs remain unchanged.</figcaption></figure>
+    </section>
+    <section id="results" class="article-section">
+      <div class="section-heading"><span class="section-number">05</span><h2>Evaluation results</h2></div>
+      <p>Evaluated on 11 DexJoCo simulation tasks and three real-robot dexterous manipulation tasks: Screw On Lid, Close Box, and Insert Battery.</p>
+      <div class="metrics"><div><strong>60.5<span>%</span></strong><p>Simulation success</p><small>+11.1 points over the base policy</small></div><div><strong>58.3<span>%</span></strong><p>Real-robot success</p><small>+8.3 points over the strongest baseline</small></div><div><strong>1.3<span>%</span></strong><p>Inference overhead</p><small>230.4 ms vs. 227.4 ms for QwenVLA</small></div></div>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="figures/experiment.png" aria-label="Enlarge experimental setup"><img src="figures/experiment.png" alt="Experimental setup: Sharpa North with 22-DoF Sharpa Wave hands and real-robot tasks; Franka Panda with a 16-DoF Allegro hand and simulation tasks." loading="lazy"><span class="expand-badge"><svg class="icon"><use href="#i-expand"/></svg></span></button><figcaption><strong>From simulation to physical dexterity.</strong> The evaluation spans single-arm and bimanual simulation tasks, alongside precise real-robot manipulation.</figcaption></figure>
+    </section>
+    <section id="foresight" class="article-section">
+      <div class="section-heading"><span class="section-number">06</span><h2>Retaining spatial foresight</h2></div>
+      <p>Does the policy retain predictive knowledge after the world model is removed? A linear probe of frozen policy features measures future 3D hand-point displacement error. DexForesight yields lower error than the architecture-matched QwenVLA action-only policy at every evaluated horizon.</p>
+      <div class="probe-comparison"><div class="probe-caption"><h3>Future hand-motion error</h3><span>0.54 s horizon · lower is better</span></div><div class="bar-row"><span>QwenVLA action-only</span><div class="bar-track"><div style="--bar-width:90.6%"></div></div><strong>13.59 <small>mm</small></strong></div><div class="bar-row highlight"><span>DexForesight</span><div class="bar-track"><div style="--bar-width:66.7%"></div></div><strong>10.01 <small>mm</small></strong></div><p><strong>26.3% lower displacement error</strong> at the longest evaluated horizon. Features are extracted from the policy alone.</p></div>
+      <p>In simulation, query alignment also outperforms directly attaching predictive heads to the base policy: <strong>60.5%</strong> overall success versus <strong>53.1%</strong> for the strongest direct-prediction control.</p>
+    </section>
+    <section id="conclusion" class="article-section conclusion"><div class="section-heading"><span class="section-number">07</span><h2>Conclusion</h2></div><p class="lead">Spatial foresight for precise, coordinated dexterous manipulation.</p><p>DexForesight grounds policy latents in predictive hand–scene dynamics learned from offline depth, kinematic hand geometry, and demonstrated controls. Query alignment transfers these dynamics into a policy that uses only RGB, language, and robot state at deployment.</p><a class="text-link" href="dexforesight.pdf" target="_blank" rel="noopener">Read the full paper<svg class="icon"><use href="#i-arrow"/></svg></a></section>
+    <section id="bibtex" class="article-section"><div class="section-heading"><span class="section-number">08</span><h2>BibTeX</h2></div><div class="citation-box"><div class="citation-toolbar"><span>CITE THIS WORK</span><button id="copy-citation"><svg class="icon"><use href="#i-copy"/></svg><span>Copy</span></button></div><pre id="citation-text">@misc{chen2026dexforesight,
+  title = {DexForesight: Grounding Dexterous Policies
+           with Implicit Spatial Foresight},
+  author = {Chen, Zhongxi and Yang, Yi and Chen, Xinyi and
+            Ye, Mingzhe and Li, Yaping and Liu, Zhihong and
+            Xu, Congsheng and Wang, Haonan and Deng, Zhijie},
+  year = {2026},
+  url = {https://dexforesight.github.io/}
+}</pre></div><p id="copy-status" class="copy-status" role="status"></p></section>
+    <footer class="footer"><a class="wordmark" href="#top"><span class="brand-dex">Dex</span><span class="brand-foresight">Foresight</span></a><p>Sharpa Robotics · SJTU · CUHK · FDU</p><a href="#top">Back to top ↑</a></footer>
+  </article>
+</div>
+</main>
+<dialog id="figure-dialog" class="figure-dialog" aria-label="Expanded research figure"><button id="close-figure" class="close-figure" aria-label="Close expanded figure">×</button><img id="expanded-figure" alt=""><p id="expanded-caption"></p></dialog>
+<noscript><style>.hero-title{opacity:1;visibility:visible;transform:none}.hero-frost{opacity:1;backdrop-filter:blur(14px)}.hero-controls,.intro-track{display:none}</style></noscript>
+</body></html>
