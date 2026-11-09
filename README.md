@@ -13,7 +13,7 @@ This is a static site. GitHub Pages serves the repository root from the `main` b
 - `index.html`: research content, authors, affiliations, and task descriptions.
 - `styles.css`: responsive layout, typography, and frosted-glass transitions.
 - `app.js`: overview playback, title transition, task video controls, figure viewer, and citation copy.
-- `media/overview.mp4`: opening overview.
+- `media/overview-original.mp4`: the original 16-second overview, remuxed for progressive playback without re-encoding the video stream.
 - `media/background.mp4`: background loop, encoded at 3× the original demo speed.
 - `media/tasks/`: Close Box, Insert Battery, and Screw On Lid experiments.
 - `dexforesight.pdf`: paper.
