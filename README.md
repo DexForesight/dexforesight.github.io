@@ -2,7 +2,7 @@
 
 **Grounding Dexterous Policies with Implicit Spatial Foresight**
 
-[Project page](https://dexforesight.github.io/) · [Paper](https://dexforesight.github.io/dexforesight.pdf)
+[Project page](https://dexforesight.github.io/) · [Paper](https://dexforesight.github.io/dexforesight.pdf) · [arXiv:2611.11166](https://arxiv.org/abs/2611.11166)
 
 Research project website from Sharpa Robotics, Shanghai Jiao Tong University, The Chinese University of Hong Kong, and Fudan University.
 
@@ -18,7 +18,7 @@ This is a static site. GitHub Pages serves the repository root from the `main` b
 - `media/tasks/`: Close Box, Insert Battery, and Screw On Lid experiments.
 - `dexforesight.pdf`: paper.
 
-The Insert Battery video starts at 00:14 of the original recording. The arXiv link is marked Coming soon until the preprint is available.
+The Insert Battery video starts at 00:14 of the original recording. The arXiv preprint is available at [arXiv:2611.11166](https://arxiv.org/abs/2611.11166). The project page provides its BibTeX citation.
 
 ## Local preview
 
